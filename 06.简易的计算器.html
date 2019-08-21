@@ -13,7 +13,7 @@
     <div id="app">
         <input type="text" v-model="n1">
 
-        <select>
+        <select v-model='opt'>
             <option value="+">+</option>
             <option value="-">-</option>
             <option value="*">*</option>
@@ -21,9 +21,9 @@
         </select>
 
         <input type="text" v-model="n2">
-        
+
         <input type="button" value="=" @click="calc">
-        
+
         <input type="text" v-model="result">
     </div>
 
@@ -31,14 +31,31 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                n1:0,
-                n2:0,
-                result:0,
-                opt:'+'
+                n1: 0,
+                n2: 0,
+                result: 0,
+                opt: '+'
             },
-            methods: { 
-                calc(){
+            methods: {
+                calc() {
+                    // switch (this.opt) {
+                    //     case '+':
+                    //         this.result = parseInt(this.n1) + parseInt(this.n2);
+                    //         break;
+                    //     case '-':
+                    //         this.result = parseInt(this.n1) - parseInt(this.n2);
+                    //         break;
+                    //     case '*':
+                    //         this.result = parseInt(this.n1) * parseInt(this.n2);
+                    //         break;
+                    //     case '/':
+                    //         this.result = parseInt(this.n1) / parseInt(this.n2);
+                    //         break;
+                    // }
 
+                    //注意：这是投机取巧的方式，正式开发中尽量少用
+                    var codestr = 'parseInt(this.n1) ' + this.opt + ' parseInt(this.n2)';
+                    this.result = eval(codestr);
                 }
             }
         })
